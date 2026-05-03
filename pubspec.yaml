@@ -43,6 +43,7 @@ dependencies:
   geolocator: ^14.0.2
   image_picker: ^1.1.2
   shared_preferences: ^2.2.2
+  connectivity_plus: ^7.1.1
 
 
 dev_dependencies:
@@ -87,7 +88,8 @@ flutter:
     - images/mekars.svg
     - images/mekars_thumb.png
     - images/station.svg
-    
+    - images/Illustrations.svg
+    - images/Illustrations1.svg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

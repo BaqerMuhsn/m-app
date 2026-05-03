@@ -6,8 +6,7 @@ import 'package:login_app/features/presentation/widgets/gradient_scaffold.dart';
 import 'package:login_app/features/presentation/widgets/upcoming_events.dart';
 import 'package:login_app/features/presentation/widgets/PopularPlaces.dart';
 import 'package:login_app/features/presentation/widgets/custom_bottom_nav.dart';
-import 'package:login_app/features/presentation/widgets/search_page_content.dart';
-import 'package:login_app/features/presentation/widgets/Recommended_places.dart';
+import 'package:login_app/features/presentation/pages/search_content.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -213,14 +212,12 @@ class _HomePageState extends State<HomePage> {
                                   FocusScope.of(context).unfocus();
                                   setState(() => _hideHomeSections = false);
                                 },
-                                style: TextButton.styleFrom(
-                                  foregroundColor: const Color(0xFF7B8CA1),
-                                  textStyle: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                child: const Text('إلغاء'),
+                            
+                                child: const Text('إلغاء' , style: TextStyle(
+                                  color: Color(0xFF7B8CA1),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                ),),
                               ),
                             ],
                           )
@@ -245,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: _hideHomeSections
-                    ? const Column(children: [SearchPageContent(), RecommendedPlaces()],)
+                    ? SearchContent()
                     : const Column(
                         key: ValueKey('home-content'),
                         children: [

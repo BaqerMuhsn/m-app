@@ -29,14 +29,11 @@ class SearchPageContent extends StatelessWidget {
             const Spacer(),
             TextButton(
               onPressed: () {},
-              style: TextButton.styleFrom(
-                foregroundColor: const Color(0xFF7B8CA1),
-                textStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              child: const Text('مسح الجميع'),
+              child: const Text('مسح الجميع' , style: TextStyle(
+                color: Color(0xFF7B8CA1),
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),),
             ),
           ],
         ),
@@ -55,9 +52,7 @@ class SearchPageContent extends StatelessWidget {
 
 class _SearchTag extends StatelessWidget {
   final String text;
-
   const _SearchTag({required this.text});
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -70,11 +65,7 @@ class _SearchTag extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-            Icons.close,
-            size: 14,
-            color: Color(0xFF7B8CA1),
-          ),
+          const Icon(Icons.close, size: 14, color: Color(0xFF7B8CA1)),
           const SizedBox(width: 8),
           Text(
             text,
