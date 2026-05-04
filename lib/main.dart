@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'features/presentation/pages/login_screen.dart'; 
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'features/presentation/modules/login/bindings/login_binding.dart';
+import 'features/presentation/modules/login/views/login_view.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -10,9 +14,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Login App',
       debugShowCheckedModeBanner: false,
+      initialBinding: LoginBinding(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
@@ -20,7 +25,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: const LoginScreen(),
+      home: const LoginView(),
     );
   }
 }

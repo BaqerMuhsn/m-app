@@ -14,9 +14,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _isPhoneFocused = false;
   String _phoneNumber = '';
-  
+
   // 2. Add a loading state variable
-  bool _isLoading = false; 
+  bool _isLoading = false;
 
   bool get _isLoginEnabled {
     return RegExp(r'^\d{11}$').hasMatch(_phoneNumber);
@@ -76,158 +76,160 @@ class _LoginScreenState extends State<LoginScreen> {
                   vertical: 16.0,
                 ),
                 child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 20),
-                  const Text(
-                    'أدخل معلومات حسابك',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w900,
-                      color: Color(0xFF102A43),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 20),
+                    const Text(
+                      'أدخل معلومات حسابك',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF102A43),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'أدخل رقم هاتفك المسجل لدينا لتسجيل الدخول الى حسابك بنجاح .',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                      height: 1.5,
+                    const SizedBox(height: 8),
+                    const Text(
+                      'أدخل رقم هاتفك المسجل لدينا لتسجيل الدخول الى حسابك بنجاح .',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                        height: 1.5,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 32),
+                    const SizedBox(height: 32),
 
-                  const Text(
-                    'رقم الهاتف',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF102A43),
+                    const Text(
+                      'رقم الهاتف',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF102A43),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Focus(
-                    onFocusChange: (hasFocus) {
-                      setState(() => _isPhoneFocused = hasFocus);
-                    },
-                    child: TextFormField(
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(11),
-                      ],
-                      onChanged: (value) {
-                        setState(() => _phoneNumber = value);
+                    const SizedBox(height: 8),
+                    Focus(
+                      onFocusChange: (hasFocus) {
+                        setState(() => _isPhoneFocused = hasFocus);
                       },
-                      decoration: InputDecoration(
-                        hintText: '0000 000 0770',
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        filled: true,
-                        fillColor: Colors.white,
-                        prefixIconConstraints: const BoxConstraints(
-                          minWidth: 25,
-                          minHeight: 25,
-                        ),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset(
-                            'images/04_call-02.svg',
-                            width: 25,
-                            height: 25,
-                            colorFilter: ColorFilter.mode(
-                              _isPhoneFocused ? Colors.blue : Colors.grey,
-                              BlendMode.srcIn,
+                      child: TextFormField(
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(11),
+                        ],
+                        onChanged: (value) {
+                          setState(() => _phoneNumber = value);
+                        },
+                        decoration: InputDecoration(
+                          hintText: '0000 000 0770',
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          filled: true,
+                          fillColor: Colors.white,
+                          prefixIconConstraints: const BoxConstraints(
+                            minWidth: 25,
+                            minHeight: 25,
+                          ),
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SvgPicture.asset(
+                              'images/04_call-02.svg',
+                              width: 25,
+                              height: 25,
+                              colorFilter: ColorFilter.mode(
+                                _isPhoneFocused ? Colors.blue : Colors.grey,
+                                BlendMode.srcIn,
+                              ),
                             ),
                           ),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide.none,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide.none,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  const Spacer(),
+                    const SizedBox(height: 24),
+                    const Spacer(),
 
-                  SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                      // 3. Update onPressed logic to handle the API call
-                      onPressed: (_isLoginEnabled && !_isLoading)
-                          ? () async {
-                              // Start loading
-                              setState(() {
-                                _isLoading = true;
-                              });
+                    SizedBox(
+                      width: double.infinity,
+                      height: 56,
+                      child: ElevatedButton(
+                        // 3. Update onPressed logic to handle the API call
+                        onPressed: (_isLoginEnabled && !_isLoading)
+                            ? () async {
+                                // Start loading
+                                setState(() {
+                                  _isLoading = true;
+                                });
 
-                              try {
-                                // Call the API
-                                final repository = AuthRepository();
-                                await repository.request(
-                                  url: 'https://fake-otp.vercel.app/send-otp',
-                                  body: {'phone': _phoneNumber},
-                                );
-
-                                // If successful, navigate to the next screen
-                                if (!context.mounted) return;
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => OtpVerificationScreen(
-                                      phoneNumber: _phoneNumber,
+                                try {
+                                  // Call the API
+                                  final repository = AuthRepository();
+                                  await repository.request(
+                                    url: 'https://fake-otp.vercel.app/send-otp',
+                                    body: {'phone': _phoneNumber},
+                                  );
+                                  // If successful, navigate to the next screen
+                                  if (!context.mounted) return;
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          OtpVerificationScreen(
+                                            phoneNumber: _phoneNumber,
+                                          ),
                                     ),
-                                  ),
-                                );
-                              } catch (e) {
-                                // If it fails, show an error message
-                                if (!context.mounted) return;
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('حدث خطأ: ${e.toString()}'),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              } finally {
-                                // Stop loading regardless of success or failure
-                                if (context.mounted) {
-                                  setState(() {
-                                    _isLoading = false;
-                                  });
+                                  );
+                                } catch (e) {
+                                  // If it fails, show an error message
+                                  if (!context.mounted) return;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('حدث خطأ: ${e.toString()}'),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                } finally {
+                                  // Stop loading regardless of success or failure
+                                  if (context.mounted) {
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+                                  }
                                 }
                               }
-                            }
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        disabledBackgroundColor: const Color(0xFFE2E8F0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(28),
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          disabledBackgroundColor: const Color(0xFFE2E8F0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(28),
+                          ),
                         ),
+                        // 4. Update the child to show a loading spinner when active
+                        child: _isLoading
+                            ? const SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : Text(
+                                ' ارسال رمز التحقق',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: _isLoginEnabled
+                                      ? Colors.white
+                                      : Colors.grey,
+                                ),
+                              ),
                       ),
-                      // 4. Update the child to show a loading spinner when active
-                      child: _isLoading
-                          ? const SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2,
-                              ),
-                            )
-                          : Text(
-                              ' ارسال رمز التحقق',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: _isLoginEnabled ? Colors.white : Colors.grey,
-                              ),
-                            ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                ],
+                    const SizedBox(height: 24),
+                  ],
                 ),
               ),
             ),
