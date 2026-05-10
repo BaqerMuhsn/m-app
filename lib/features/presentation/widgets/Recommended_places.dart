@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../modules/search/controllers/search_controller.dart';
+import '../model/popular_models.dart';
+
 /// Thumbnails use PNG: these SVG files embed raster data; flutter_svg only handles vector paths well.
 class RecommendedPlaces extends StatelessWidget {
   const RecommendedPlaces({super.key});
 
-  static const List<Map<String, String>> recommendedPlaces = [
-    {'name': 'المنصورة', 'image': 'images/computing_thumb.png'},
-    {'name': 'المنصورة', 'image': 'images/mekars_thumb.png'},
-    {'name': 'المنصورة', 'image': 'images/mekars_thumb.png'},
-    {'name': 'المنصورة', 'image': 'images/computing_thumb.png'},
-    {'name': 'المنصورة', 'image': 'images/mekars_thumb.png'},
-    {'name': 'المنصورة', 'image': 'images/computing_thumb.png'},
-  ];
-
+ 
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,10 +28,10 @@ class RecommendedPlaces extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
-            itemCount: recommendedPlaces.length,
+            itemCount: SearchingController.recommendedPlaces.length,
             separatorBuilder: (_, __) => const SizedBox(width: 16),
             itemBuilder: (context, i) {
-              final place = recommendedPlaces[i];
+              final place = SearchingController.recommendedPlaces[i];
               return _RecommendedPlaceTile(
                 name: place['name']!,
                 imagePath: place['image']!,

@@ -34,7 +34,7 @@ class SearchContent extends StatelessWidget {
         }
         return const Column(
           children: [
-            SearchPageContent(),
+            RecentSearches(),
             RecommendedPlaces(),
             EventsYouMightLike(),
           ],

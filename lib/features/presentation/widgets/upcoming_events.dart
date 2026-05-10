@@ -1,51 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-class UpcomingEvents extends StatefulWidget {
+import '../model/popular_models.dart';
+import '../modules/home/controllers/home_controllers.dart';
+
+class UpcomingEvents extends StatelessWidget {
   final String title;
   final String seeAllLabel;
   final VoidCallback? onSeeAll;
 
-  final List<UpcomingEvent> events;
 
   const UpcomingEvents({
     super.key,
     this.title = ' أبرز الفعاليات القادمة ',
     this.seeAllLabel = 'رؤية الجميع',
     this.onSeeAll,
-
-    this.events = const [
-      UpcomingEvent(
-        title: '1تعلم أساسيات تصميم تجربة المستخدم',
-        venue: 'المحطة',
-        dateMonth: 'أذار',
-        dateDay: '6',
-        imageUrl: 'images/Rectangle2.png',
-      ),
-      UpcomingEvent(
-        title: '2تعلم أساسيات تصميم تجربة المستخدم',
-        venue: 'المحطة',
-        dateMonth: 'أذار',
-        dateDay: '6',
-        imageUrl: 'images/Rectangle2.png',
-      ),
-      UpcomingEvent(
-        title: '3تعلم أساسيات تصميم تجربة المستخدم',
-        venue: 'المحطة',
-        dateMonth: 'أذار',
-        dateDay: '6',
-        imageUrl: 'images/Rectangle2.png',
-      ),
-    ],
   });
 
   @override
-  State<UpcomingEvents> createState() => _UpcomingEventsState();
-}
-
-class _UpcomingEventsState extends State<UpcomingEvents> {
-  @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -53,7 +28,7 @@ class _UpcomingEventsState extends State<UpcomingEvents> {
           children: [
             Expanded(
               child: Text(
-                widget.title,
+                title,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
@@ -63,14 +38,14 @@ class _UpcomingEventsState extends State<UpcomingEvents> {
             ),
             InkWell(
               borderRadius: BorderRadius.circular(8),
-              onTap: widget.onSeeAll,
+              onTap: onSeeAll,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      widget.seeAllLabel,
+                      seeAllLabel,
                       style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
@@ -97,35 +72,17 @@ class _UpcomingEventsState extends State<UpcomingEvents> {
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
             padding: const EdgeInsets.symmetric(vertical: 4),
-            itemCount: widget.events.length,
+            itemCount: controller.upcomingEvents.length,
             separatorBuilder: (_, __) => const SizedBox(width: 15),
             itemBuilder: (context, i) => SizedBox(
               width: 300,
-              child: _EventCard(event: widget.events[i]),
+              child: _EventCard(event: controller.upcomingEvents[i]),
             ),
           ),
         ),
       ],
     );
   }
-}
-
-class UpcomingEvent {
-  final String title;
-  final String venue;
-  final String dateMonth;
-  final String dateDay;
-  final String? imageUrl;
-  final String? venueLogoAsset;
-
-  const UpcomingEvent({
-    required this.title,
-    required this.venue,
-    required this.dateMonth,
-    required this.dateDay,
-    this.imageUrl,
-    this.venueLogoAsset,
-  });
 }
 
 class _EventCard extends StatelessWidget {
@@ -257,7 +214,7 @@ class _EventCard extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 6),
                                   Text(
-                                   '${event.dateDay} ${event.dateMonth}',
+                                    '${event.dateDay} ${event.dateMonth}',
                                     style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,

@@ -1,69 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Events extends StatefulWidget {
+import '../model/popular_models.dart';
+import '../modules/home/controllers/home_controllers.dart';
+class Events extends StatelessWidget {
   final String title;
   final String seeAllLabel;
   final VoidCallback? onSeeAll;
-  final List<PopularCategory> categories;
-  final List<PopularEvent> events;
-
-  const Events({
+  
+const Events({
     super.key,
     this.title = 'فعاليات هذا الأسبوع',
     this.seeAllLabel = 'رؤية الجميع',
     this.onSeeAll,
-    this.categories = const [
-      PopularCategory(label: 'الكل', icon: Icons.apps_rounded),
-      PopularCategory(label: 'التصميم', icon: Icons.brush_rounded),
-      PopularCategory(label: 'التقنية والبرمجة', icon: Icons.code_rounded),
-      PopularCategory(label: 'التصميم', icon: Icons.brush_rounded),
-      PopularCategory(label: 'التقنية والبرمجة', icon: Icons.code_rounded),
-    ],
-    this.events = const [
-      PopularEvent(
-        title: '1تعلم أساسيات تصميم تجربة المستخدم',
-        venue: 'المحطة',
-        dateMonth: 'أذار',
-        dateDay: '6',
-        imageUrl: 'images/Rectangle2.png',
-        venueLogoAsset: 'images/logo.png',
-      ),
-      PopularEvent(
-        title: '2تعلم أساسيات تصميم تجربة المستخدم',
-        venue: 'المحطة',
-        dateMonth: 'أذار',
-        dateDay: '6',
-        imageUrl: 'images/Rectangle2.png',
-        venueLogoAsset: 'images/logo.png',
-      ),
-      PopularEvent(
-        title: '3تعلم أساسيات تصميم تجربة المستخدم',
-        venue: 'المحطة',
-        dateMonth: 'أذار',
-        dateDay: '6',
-        imageUrl: 'images/Rectangle2.png',
-        venueLogoAsset: 'images/logo.png',
-      ),
-    ],
   });
 
-  @override
-  State<Events> createState() => _EventsState();
-}
-
-class _EventsState extends State<Events> {
-  int _selected = 0;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            Expanded(
+            Expanded( 
               child: Text(
-                widget.title,
+                title,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
@@ -73,14 +36,14 @@ class _EventsState extends State<Events> {
             ),
             InkWell(
               borderRadius: BorderRadius.circular(8),
-              onTap: widget.onSeeAll,
+              onTap: onSeeAll,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      widget.seeAllLabel,
+                      seeAllLabel,
                       style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
@@ -102,16 +65,20 @@ class _EventsState extends State<Events> {
         const SizedBox(height: 12),
         SizedBox(
           height: 40,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.categories.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 8),
-            itemBuilder: (context, i) => _CategoryChip(
-              category: widget.categories[i],
-              selected: i == _selected,
-              onTap: () => setState(() => _selected = i),
-            ),
-          ),
+          child: Obx(() {
+            // Read Rx here so GetX tracks it; itemBuilder runs outside Obx's scope.
+            final selectedIndex = controller.selectedCategoryIndex.value;
+            return ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: controller.categories.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 8),
+              itemBuilder: (context, i) => _CategoryChip(
+                category: controller.categories[i],
+                selected: i == selectedIndex,
+                onTap: () => controller.selectedCategoryIndex.value = i,
+              ),
+            );
+          }),
         ),
         const SizedBox(height: 16),
         SizedBox(
@@ -120,41 +87,17 @@ class _EventsState extends State<Events> {
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
             padding: const EdgeInsets.symmetric(vertical: 4),
-            itemCount: widget.events.length,
+            itemCount: controller.events.length,
             separatorBuilder: (_, __) => const SizedBox(width: 15),
             itemBuilder: (context, i) => SizedBox(
               width: 350,
-              child: _EventCard(event: widget.events[i]),
+              child: _EventCard(event: controller.events[i]),
             ),
           ),
         ),
       ],
     );
   }
-}
-
-class PopularCategory {
-  final String label;
-  final IconData icon;
-  const PopularCategory({required this.label, required this.icon});
-}
-
-class PopularEvent {
-  final String title;
-  final String venue;
-  final String dateMonth;
-  final String dateDay;
-  final String? imageUrl;
-  final String? venueLogoAsset;
-
-  const PopularEvent({
-    required this.title,
-    required this.venue,
-    required this.dateMonth,
-    required this.dateDay,
-    this.imageUrl,
-    this.venueLogoAsset,
-  });
 }
 
 class _CategoryChip extends StatelessWidget {

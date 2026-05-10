@@ -1,42 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../model/popular_models.dart';
+import '../modules/home/controllers/home_controllers.dart';
 
 class HallsAndWorkspaces extends StatelessWidget {
   final String title;
   final String seeAllLabel;
   final VoidCallback? onSeeAll;
-  final List<HallWorkspaceItem> items;
 
   const HallsAndWorkspaces({
     super.key,
     this.title = 'القاعات و مساحات العمل',
     this.seeAllLabel = 'رؤية الجميع',
     this.onSeeAll,
-    this.items = const [
-      HallWorkspaceItem(
-        imagePath: 'images/img3.png',
-        title: 'قاعة المحطة الكبرى للإيفنتات',
-        details: 'السعة: 200 شخص   السعر: 100 د.ع للساعة',
-      ),
-      HallWorkspaceItem(
-        imagePath: 'images/img3.png',
-        title: 'قاعة المحطة الكبرى للإيفنتات',
-        details: 'السعة: 200 شخص   السعر: 100 د.ع للساعة',
-      ),
-      HallWorkspaceItem(
-        imagePath: 'images/img3.png',
-        title: 'قاعة المحطة الكبرى للإيفنتات',
-        details: 'السعة: 200 شخص   السعر: 100 د.ع للساعة',
-      ),
-      HallWorkspaceItem(
-        imagePath: 'images/img3.png',
-        title: 'قاعة المحطة الكبرى للإيفنتات',
-        details: 'السعة: 200 شخص   السعر: 100 د.ع للساعة',
-      ),
-    ],
+
   });
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -85,29 +68,17 @@ class HallsAndWorkspaces extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
-            itemCount: items.length,
+            itemCount: controller.hallWorkspaceItems.length,
             separatorBuilder: (_, __) => const SizedBox(width: 16),
             itemBuilder: (context, i) => SizedBox(
               width: 350,
-              child: _HallCard(item: items[i]),
+              child: _HallCard(item: controller.hallWorkspaceItems[i]),
             ),
           ),
         ),
       ],
     );
   }
-}
-
-class HallWorkspaceItem {
-  final String imagePath;
-  final String title;
-  final String details;
-
-  const HallWorkspaceItem({
-    required this.imagePath,
-    required this.title,
-    required this.details,
-  });
 }
 
 class _HallCard extends StatelessWidget {

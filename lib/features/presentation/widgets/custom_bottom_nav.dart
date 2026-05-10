@@ -110,6 +110,6 @@ class CustomBottomNav extends StatelessWidget {
 class _NavItem {
   final String label;
   final IconData icon;
-
+  
   const _NavItem({required this.label, required this.icon});
 }

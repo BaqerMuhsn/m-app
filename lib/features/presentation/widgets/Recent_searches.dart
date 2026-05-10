@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import '../modules/search/controllers/search_controller.dart';
+
 
 /// Recent search UI with built-in sample data (same idea as [RecommendedPlaces]).
-class SearchPageContent extends StatelessWidget {
-  const SearchPageContent({super.key});
+class RecentSearches extends StatelessWidget {
+  const RecentSearches({super.key});
 
-  static const List<String> _recentSearches = [
-    'مساحة عمل مشتركة',
-    'قاعة اجتماعات',
-    'دورة التسويق الإلكتروني',
-    'ورشة تجربة المستخدم',
-  ];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +39,8 @@ class SearchPageContent extends StatelessWidget {
         Wrap(
           spacing: 10,
           runSpacing: 10,
-          children: _recentSearches
-              .map((text) => _SearchTag(text: text))
+          children: SearchingController.recentSearches
+              .map((item) => _SearchTag(text: item.text))
               .toList(),
         ),
       ],

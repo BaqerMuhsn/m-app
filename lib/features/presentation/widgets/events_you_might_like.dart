@@ -1,26 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../model/popular_models.dart';
+import '../modules/search/controllers/search_controller.dart';
 class EventsYouMightLike extends StatelessWidget {
-  final List<EventYouMightLikeItem> events;
-
-  const EventsYouMightLike({
-    super.key,
-    this.events = const [
-      EventYouMightLikeItem(
-        title: 'تعلم أساسيات تصميم تجربة\nالمستخدم',
-        venue: 'المحطة',
-        dateText: '6 آذار | 7:00 م',
-        imagePath: 'images/Rectangle2.png',
-      ),
-      EventYouMightLikeItem(
-        title: 'كيف تصبح مطور تطبيقات\nموبايل محترف ؟',
-        venue: 'كوميونك',
-        dateText: '8 آذار | 6:30 م',
-        imagePath: 'images/img2.png',
-      ),
-    ],
-  });
+  const EventsYouMightLike({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +26,10 @@ class EventsYouMightLike extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 18),
-          ...events.map(
+          ...SearchingController.events.map(
             (event) => Padding(
               padding: const EdgeInsets.only(bottom: 18),
-              child: _EventYouMightLikeCard(item: event),
+              child: _EventYouMightLikeCard(event: event),
             ),
           ),
         ],
@@ -54,24 +38,12 @@ class EventsYouMightLike extends StatelessWidget {
   }
 }
 
-class EventYouMightLikeItem {
-  final String title;
-  final String venue;
-  final String dateText;
-  final String imagePath;
 
-  const EventYouMightLikeItem({
-    required this.title,
-    required this.venue,
-    required this.dateText,
-    required this.imagePath,
-  });
-}
 
 class _EventYouMightLikeCard extends StatelessWidget {
-  final EventYouMightLikeItem item;
+  final EventYouMightLike event;
 
-  const _EventYouMightLikeCard({required this.item});
+  const _EventYouMightLikeCard({required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +63,7 @@ class _EventYouMightLikeCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(25),
             child: Image.asset(
-              item.imagePath,
+              event.imagePath,
               width: 120,
               height: 100,
               fit: BoxFit.cover,
@@ -104,7 +76,7 @@ class _EventYouMightLikeCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.title,
+                  event.title,
                   textAlign: TextAlign.start,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -131,7 +103,7 @@ class _EventYouMightLikeCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                      Text(
-                      item.venue,
+                      event.venue,
                       style: const TextStyle(
                         fontSize: 12,
                         height: 1.1,
@@ -158,7 +130,7 @@ class _EventYouMightLikeCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                       Text(
-                      item.dateText,
+                      event.dateText,
                       style: const TextStyle(
                         fontSize: 12,
                         height: 1.1,

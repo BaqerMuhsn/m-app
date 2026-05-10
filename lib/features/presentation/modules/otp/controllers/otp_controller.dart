@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../data/auth_repository.dart';
 import '../../login/controllers/login_controller.dart';
-
+import '../../home/views/home_views.dart';
+import '../../home/bindings/home_bindings.dart';
 
 class OtpController extends GetxController {
   final AuthRepository _repository = AuthRepository();
@@ -80,6 +81,7 @@ class OtpController extends GetxController {
         url: 'https://fake-otp.vercel.app/verify-otp',
         body: {'phone': phoneNumber , 'code': otpCode.value},
       );
+      Get.to(() => const HomeView(), binding: HomeBinding());
     } catch (e) {
       Get.snackbar(
         'خطأ',
@@ -89,7 +91,7 @@ class OtpController extends GetxController {
         colorText: Colors.white,
       );
     } finally {
-      Get.back();
+    
     }
   }
 

@@ -1,50 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
+import '../model/popular_models.dart';
+import '../modules/home/controllers/home_controllers.dart';
 class PopularPlaces extends StatelessWidget {
   final String title;
   final String seeAllLabel;
   final VoidCallback? onSeeAll;
-  final List<PopularPlace> places;
 
   const PopularPlaces({
     super.key,
     this.title = 'الأماكن الشهرية',
     this.seeAllLabel = 'رؤية الجميع',
     this.onSeeAll,
-    this.places = const [
-      PopularPlace(
-        name: 'المحطة',
-        locationLabel: 'كرادة خارج',
-        imagePath: 'images/img2.png',
-        logoPath: 'images/logo.png',
-        rating: '4.9',
-        halls: '8 القاعات',
-        events: '3 الفعاليات',
-      ),
-      PopularPlace(
-        name: 'المحطة',
-        locationLabel: 'كرادة خارج',
-        imagePath: 'images/img2.png',
-        logoPath: 'images/logo.png',
-        rating: '4.9',
-        halls: '8 القاعات',
-        events: '3 الفعاليات',
-      ),
-      PopularPlace(
-        name: 'المحطة',
-        locationLabel: 'كرادة خارج',
-        imagePath: 'images/img2.png',
-        logoPath: 'images/logo.png',
-        rating: '4.9',
-        halls: '8 القاعات',
-        events: '3 الفعاليات',
-      ),
-    ],
   });
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -93,11 +67,11 @@ class PopularPlaces extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
-            itemCount: places.length,
+            itemCount: controller.popularPlaces.length,
             separatorBuilder: (_, __) => const SizedBox(width: 15),
             itemBuilder: (context, i) => SizedBox(
               width: 350,
-              child: _PopularPlaceCard(place: places[i]),
+              child: _PopularPlaceCard(place: controller.popularPlaces[i] as PopularPlace),
               
             ),
           ),
@@ -107,25 +81,7 @@ class PopularPlaces extends StatelessWidget {
   }
 }
 
-class PopularPlace {
-  final String name;
-  final String locationLabel;
-  final String imagePath;
-  final String logoPath;
-  final String rating;
-  final String halls;
-  final String events;
 
-  const PopularPlace({
-    required this.name,
-    required this.locationLabel,
-    required this.imagePath,
-    required this.logoPath,
-    required this.rating,
-    required this.halls,
-    required this.events,
-  });
-}
 
 class _PopularPlaceCard extends StatelessWidget {
   final PopularPlace place;
