@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../modules/search/controllers/search_controller.dart';
+import '../../controllers/search_controller.dart';
 
 
 /// Recent search UI with built-in sample data (same idea as [RecommendedPlaces]).

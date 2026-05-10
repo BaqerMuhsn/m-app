@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../model/popular_models.dart';
-import '../modules/home/controllers/home_controllers.dart';
+import '../../../../model/popular_models.dart';
+import '../../controllers/home_controllers.dart';
 class Events extends StatelessWidget {
   final String title;
   final String seeAllLabel;

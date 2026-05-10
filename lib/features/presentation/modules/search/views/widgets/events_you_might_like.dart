@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../model/popular_models.dart';
-import '../modules/search/controllers/search_controller.dart';
+import '../../../../model/popular_models.dart';
+import '../../controllers/search_controller.dart';
 class EventsYouMightLike extends StatelessWidget {
   const EventsYouMightLike({super.key});
 

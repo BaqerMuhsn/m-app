@@ -3,11 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 // Adjust these imports to match your actual project structure
-  import '../../../widgets/Events.dart';
-  import '../../../widgets/HallsAndWorkspaces.dart';
+  import 'widgets/Events.dart';
+  import 'widgets/HallsAndWorkspaces.dart';
   import '../../../widgets/gradient_scaffold.dart';
-  import '../../../widgets/upcoming_events.dart';
-  import '../../../widgets/PopularPlaces.dart';
+  import 'widgets/upcoming_events.dart';
+  import 'widgets/PopularPlaces.dart';
 import '../../../widgets/custom_bottom_nav.dart';
 import '../../search/views/search_view.dart';
 import '../controllers/home_controllers.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../modules/search/controllers/search_controller.dart';
-import '../model/popular_models.dart';
+import '../../controllers/search_controller.dart';
+import '../../../../model/popular_models.dart';
 
 /// Thumbnails use PNG: these SVG files embed raster data; flutter_svg only handles vector paths well.
 class RecommendedPlaces extends StatelessWidget {

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../model/popular_models.dart';
-import '../modules/home/controllers/home_controllers.dart';
+import '../../../../model/popular_models.dart';
+import '../../controllers/home_controllers.dart';
 
 class UpcomingEvents extends StatelessWidget {
   final String title;

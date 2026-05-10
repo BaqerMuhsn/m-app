@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// Adjust your imports
-import '../../../widgets/Recent_searches.dart';
-import '../../../widgets/Recommended_places.dart';
-import '../../../widgets/events_you_might_like.dart';
-import '../../../model/warning_type.dart';
-import '../../../widgets/warning_search.dart';
+  // Adjust your imports
+    import 'widgets/Recent_searches.dart';
+    import 'widgets/Recommended_places.dart';
+    import 'widgets/events_you_might_like.dart';
+    import '../../../model/warning_type.dart';
+    import 'widgets/warning_search.dart';
 
 // Import the new NetworkController
-import '../../../../../core/controllers/network_controller.dart'; 
+    import '../../../../../core/controllers/network_controller.dart'; 
 
 class SearchContent extends StatelessWidget {
   const SearchContent({super.key});
