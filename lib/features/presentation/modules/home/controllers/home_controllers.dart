@@ -8,9 +8,16 @@ class HomeController extends GetxController {
   var isScrolled = false.obs;
   var isSearchActive = false.obs; // Replaces _hideHomeSections
 
+  /// Matches `CustomBottomNav` indices.
+  final navIndex = 0.obs;
+
   final searchController = TextEditingController();
 
   var selectedCategoryIndex = 0.obs;
+
+  void setNavIndex(int index) {
+    navIndex.value = index;
+  }
 
   final List<PopularCategory> categories = const [
     PopularCategory(label: 'الكل', icon: Icons.apps_rounded),
