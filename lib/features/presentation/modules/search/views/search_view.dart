@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../home/controllers/home_controllers.dart';
+
   // Adjust your imports
     import 'widgets/Recent_searches.dart';
     import 'widgets/Recommended_places.dart';
     import 'widgets/events_you_might_like.dart';
     import '../../../model/warning_type.dart';
     import 'widgets/warning_search.dart';
-
+    import '../../../widgets/search_bar.dart';
 // Import the new NetworkController
     import '../../../../../core/controllers/network_controller.dart'; 
 
@@ -28,11 +30,18 @@ class SearchContent extends StatelessWidget {
     // Get.put ensures it starts listening to the stream as soon as this widget loads.
     final NetworkController networkController = Get.put(NetworkController());
 
+    final home = Get.find<HomeController>();
+
     // Obx replaces StreamBuilder
     return Obx(() {
       if (networkController.isConnected.value) {
         return Column(
           children: [
+            HomeSearchBar(
+              textController: home.searchController,
+              onCancel: home.cancelSearch,
+              showCancel: true,
+            ),
             const SizedBox(height: 100),
             Center(
               child: WarningSearch(warningType: warningTypes.first),

@@ -7,4 +7,3 @@ class ExploreController extends GetxController {
   /// Reuse the same places data shown on Home.
   List<PopularPlace> get places => Get.find<HomeController>().popularPlaces;
 }
-

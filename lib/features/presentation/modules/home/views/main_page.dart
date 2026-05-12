@@ -32,7 +32,8 @@ class MainPage extends GetView<HomeController> {
             : PreferredSize(
                 preferredSize: const Size.fromHeight(_appBarHeight),
                 child: AppBar(
-                  backgroundColor: controller.isScrolled.value ? const Color(0xFFFFFFFF) : Colors.transparent,
+                  backgroundColor:
+                      controller.isScrolled.value ? const Color(0xFFFFFFFF) : Colors.transparent,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
                   ),
@@ -56,12 +57,20 @@ class MainPage extends GetView<HomeController> {
                           children: const [
                             Text(
                               'أهلاً بك',
-                              style: TextStyle(fontSize: 12, color: Color(0xFF78879A), fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF78879A),
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             SizedBox(height: 2),
                             Text(
                               'حسين علي أسامة',
-                              style: TextStyle(fontSize: 14, color: Color(0xFF102A43), fontWeight: FontWeight.w800),
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFF102A43),
+                                fontWeight: FontWeight.w800,
+                              ),
                             ),
                           ],
                         ),
@@ -88,7 +97,8 @@ class MainPage extends GetView<HomeController> {
               ),
         body: NotificationListener<ScrollNotification>(
           onNotification: (notification) {
-            final isVertical = notification.metrics.axis == Axis.vertical && notification.depth == 0;
+            final isVertical =
+                notification.metrics.axis == Axis.vertical && notification.depth == 0;
             if (isVertical) {
               controller.onScroll(notification.metrics.pixels);
             }
@@ -135,4 +145,3 @@ class MainPage extends GetView<HomeController> {
     });
   }
 }
-

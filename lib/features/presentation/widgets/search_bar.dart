@@ -77,7 +77,7 @@ class HomeSearchBar extends StatelessWidget {
                   children: [
                     const SizedBox(width: 10),
                     TextButton(
-                      onPressed: onCancel,
+                      onPressed: onCancel ,
                       child: const Text(
                         'إلغاء',
                         style: TextStyle(
