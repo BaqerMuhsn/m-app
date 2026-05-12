@@ -20,6 +20,7 @@ class AppOutlineActionButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
+        fixedSize: const Size(170, 50),
         side: const BorderSide(color: Color(0xFFDCE3EA)),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
         padding: padding,
@@ -28,7 +29,7 @@ class AppOutlineActionButton extends StatelessWidget {
         label,
         style: const TextStyle(
           color: Color(0xFF7B8CA1),
-          fontSize: 20,
+          fontSize: 14,
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -65,6 +66,7 @@ class AppPrimaryGradientButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
+          fixedSize: const Size(170, 50),
           elevation: 0,
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
@@ -75,7 +77,7 @@ class AppPrimaryGradientButton extends StatelessWidget {
           label,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 20,
+            fontSize: 14,
             fontWeight: FontWeight.w800,
           ),
         ),
