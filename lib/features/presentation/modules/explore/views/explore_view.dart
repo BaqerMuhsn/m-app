@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../widgets/search_bar.dart';
 import '../../../model/popular_models.dart';
@@ -11,7 +12,7 @@ class ExploreView extends StatelessWidget {
     super.key,
     required this.searchController,
     required this.showCancel,
-    required this.onSearchTap,
+    this.onSearchTap,
     required this.onCancel,
     required this.places,
     this.onFilterTap,
@@ -19,7 +20,8 @@ class ExploreView extends StatelessWidget {
 
   final TextEditingController searchController;
   final bool showCancel;
-  final VoidCallback onSearchTap;
+  /// When null, tapping the field does not open the global search screen (home-only).
+  final VoidCallback? onSearchTap;
   final VoidCallback onCancel;
   final VoidCallback? onFilterTap;
   final List<PopularPlace> places;
@@ -96,7 +98,10 @@ class ExploreView extends StatelessWidget {
             SizedBox(
               height: 240,
               width: 320,
-              child: ExplorePlaceCard(place: places[i]),
+              child: GestureDetector(
+                onTap: () => Get.toNamed('/details', arguments: places[i]),
+                child: ExplorePlaceCard(place: places[i]),
+              ),
             ),
           ],
         ],

@@ -130,7 +130,6 @@ class MainPage extends GetView<HomeController> {
                               ? ExploreView(
                                   searchController: controller.searchController,
                                   showCancel: controller.isSearchActive.value,
-                                  onSearchTap: controller.enableSearch,
                                   onCancel: controller.cancelSearch,
                                   places: Get.find<ExploreController>().places,
                                 )
