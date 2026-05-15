@@ -12,7 +12,6 @@ class NetworkController extends GetxController {
   void onInit() {
     super.onInit();
     _checkInitialConnection();
-    
     // Listen to network changes
     _subscription = Connectivity().onConnectivityChanged.listen(_updateConnectionStatus);
   }

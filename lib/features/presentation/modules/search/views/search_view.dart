@@ -32,29 +32,29 @@ class SearchContent extends StatelessWidget {
 
     final home = Get.find<HomeController>();
 
-    // Obx replaces StreamBuilder
     return Obx(() {
-      if (networkController.isConnected.value) {
-        return Column(
-          children: [
-            HomeSearchBar(
-              textController: home.searchController,
-              onCancel: home.cancelSearch,
-              showCancel: true,
-            ),
-            const SizedBox(height: 100),
-            Center(
-              child: WarningSearch(warningType: warningTypes.first),
-            ),
-          ],
-        );
-      }
-      
-      return const Column(
+      final connected = !networkController.isConnected.value;
+
+      return Column(
         children: [
-          RecentSearches(),
-          RecommendedPlaces(),
-          EventsYouMightLike(),
+          HomeSearchBar(
+            textController: home.searchController,
+            onCancel: home.cancelSearch,
+            showCancel: true,
+          ),
+          const SizedBox(height: 20),
+          if (!connected)
+            Padding(
+              padding: const EdgeInsets.only(top: 80),
+              child: Center(
+                child: WarningSearch(warningType: warningTypes.first),
+              ),
+            )
+          else ...[
+            const RecentSearches(),
+            const RecommendedPlaces(),
+            const EventsYouMightLike(),
+          ],
         ],
       );
     });
