@@ -74,7 +74,14 @@ class UpcomingEvent {
 
 
 
- class HallWorkspaceItem {
+class HallAmenity {
+  final IconData icon;
+  final String label;
+
+  const HallAmenity({required this.icon, required this.label});
+}
+
+class HallWorkspaceItem {
   final String imagePath;
   final String title;
   final String details;

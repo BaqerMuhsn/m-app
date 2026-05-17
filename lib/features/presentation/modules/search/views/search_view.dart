@@ -26,21 +26,22 @@ class SearchContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize the controller. 
-    // Get.put ensures it starts listening to the stream as soon as this widget loads.
-    final NetworkController networkController = Get.put(NetworkController());
-
+    final networkController = Get.find<NetworkController>();
     final home = Get.find<HomeController>();
 
     return Obx(() {
-      final connected = !networkController.isConnected.value;
+      final connected = networkController.isConnected.value;
 
       return Column(
         children: [
           HomeSearchBar(
             textController: home.searchController,
-            onCancel: home.cancelSearch,
             showCancel: true,
+            onCancel: () {
+              home.searchController.clear();
+              FocusManager.instance.primaryFocus?.unfocus();
+              Get.back();
+            },
           ),
           const SizedBox(height: 20),
           if (!connected)

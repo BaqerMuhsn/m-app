@@ -39,7 +39,6 @@ class HomeSearchBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(22),
                 border: Border.all(color: const Color(0xFFE4E8EF)),
                 boxShadow: const [
-                  BoxShadow(color: Color(0x0F000000), blurRadius: 10, offset: Offset(0, 2)),
                 ],
               ),
               child: Row(
@@ -52,6 +51,7 @@ class HomeSearchBar extends StatelessWidget {
                   const SizedBox(width: 8),
                   Expanded(
                     child: TextField(
+                      
                       controller: textController,
                       onTap: onFieldTap,
                       textAlignVertical: TextAlignVertical.center,

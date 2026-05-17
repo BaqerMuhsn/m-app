@@ -6,7 +6,6 @@ import '../../../model/popular_models.dart';
 class HomeController extends GetxController {
   // Observables replacing setState variables
   var isScrolled = false.obs;
-  var isSearchActive = false.obs; // Replaces _hideHomeSections
 
   /// Matches `CustomBottomNav` indices.
   final navIndex = 0.obs;
@@ -135,18 +134,13 @@ class HomeController extends GetxController {
       isScrolled.value = value;
     }
   }
+  
 
-  void enableSearch() {
-    if (!isSearchActive.value) {
-      isSearchActive.value = true;
-    }
-  }
+  void openSearch() => Get.toNamed('/search');
 
   void cancelSearch() {
     searchController.clear();
-    // Closes the keyboard natively
-    FocusManager.instance.primaryFocus?.unfocus(); 
-    isSearchActive.value = false;
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   @override

@@ -22,8 +22,7 @@ class HomePage extends GetView<HomeController> {
         HomeSearchBar(
           switchDuration: _switchDuration,
           textController: controller.searchController,
-          showCancel: controller.isSearchActive.value,
-          onFieldTap: controller.enableSearch,
+          onFieldTap: controller.openSearch,
           onCancel: controller.cancelSearch,
         ),
         const SizedBox(height: 20),

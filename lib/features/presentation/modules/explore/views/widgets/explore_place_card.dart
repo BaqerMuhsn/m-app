@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../model/popular_models.dart';
 
+
 class ExplorePlaceCard extends StatelessWidget {
   final PopularPlace place;
 

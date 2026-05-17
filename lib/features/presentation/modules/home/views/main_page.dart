@@ -6,7 +6,6 @@ import '../../../widgets/custom_bottom_nav.dart';
 import '../../../widgets/gradient_scaffold.dart';
 import '../../explore/controllers/explore_controller.dart';
 import '../../explore/views/explore_view.dart';
-import '../../search/views/search_view.dart';
 import '../controllers/home_controllers.dart';
 import 'home_views.dart';
 
@@ -24,12 +23,10 @@ class MainPage extends GetView<HomeController> {
       final navIndex = controller.navIndex.value;
       final topInset = MediaQuery.of(context).padding.top;
       final bottomPad = MediaQuery.viewPaddingOf(context).bottom + _bottomBarScrollPadding;
-      final appBarTop = controller.isSearchActive.value ? topInset : topInset + _appBarHeight;
+      final appBarTop = topInset + _appBarHeight;
 
       return GradientScaffold(
-        appBar: controller.isSearchActive.value
-            ? null
-            : PreferredSize(
+        appBar: PreferredSize(
                 preferredSize: const Size.fromHeight(_appBarHeight),
                 child: AppBar(
                   backgroundColor:
@@ -89,12 +86,10 @@ class MainPage extends GetView<HomeController> {
                   ),
                 ),
               ),
-        bottomNavigationBar: controller.isSearchActive.value
-            ? null
-            : CustomBottomNav(
-                activeIndex: navIndex,
-                onTap: controller.setNavIndex,
-              ),
+        bottomNavigationBar: CustomBottomNav(
+          activeIndex: navIndex,
+          onTap: controller.setNavIndex,
+        ),
         body: NotificationListener<ScrollNotification>(
           onNotification: (notification) {
             final isVertical =
@@ -122,19 +117,17 @@ class MainPage extends GetView<HomeController> {
                       child: SlideTransition(position: slide, child: child),
                     );
                   },
-                  child: controller.isSearchActive.value
-                      ? const SearchContent()
-                      : KeyedSubtree(
-                          key: ValueKey(navIndex),
-                          child: navIndex == 2
-                              ? ExploreView(
-                                  searchController: controller.searchController,
-                                  showCancel: controller.isSearchActive.value,
-                                  onCancel: controller.cancelSearch,
-                                  places: Get.find<ExploreController>().places,
-                                )
-                              : const HomePage(),
-                        ),
+                  child: KeyedSubtree(
+                    key: ValueKey(navIndex),
+                    child: navIndex == 2
+                        ? ExploreView(
+                            searchController: controller.searchController,
+                            showCancel: false,
+                            onCancel: controller.cancelSearch,
+                            places: Get.find<ExploreController>().places,
+                          )
+                        : const HomePage(),
+                  ),
                 ),
               ],
             ),
